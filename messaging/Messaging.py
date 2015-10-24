@@ -5,35 +5,22 @@ __author__ = 'arik'
 
 import pika
 
-host = "localhost"
-credentials = pika.PlainCredentials(RABBIT_LOGIN, RABBIT_PASSWORD)
-connection = pika.BlockingConnection(pika.ConnectionParameters(
-    host=RABBIT_HOST, credentials=credentials)
-)
-channel = connection.channel()
+def getConnection():
+    host = "localhost"
+    credentials = pika.PlainCredentials(RABBIT_LOGIN, RABBIT_PASSWORD)
+    connection = pika.BlockingConnection(pika.ConnectionParameters(
+        host=RABBIT_HOST, credentials=credentials)
+    )
+    return connection
 
-def getChanel():
-    return channel
-
-
-def closeConnection():
-    return connection.close()
-
-def registerListener(callbackFn, queueName):
-    print "Start queue listener"
-    channel = getChanel()
-    tag = channel.basic_consume(callbackFn,
-                      queue=queueName,
-                      no_ack=True)
-    return tag
+sendChanel = getConnection().channel()
 
 
 def declareQueue(queueName):
-    getChanel().queue_declare(queue=queueName)
+    sendChanel.queue_declare(queue=queueName)
 
 
 def sendMessage(queueName, message) :
-    channel = getChanel()
-    channel.basic_publish(exchange='',
+    sendChanel.basic_publish(exchange='',
                   routing_key=queueName,
                   body=message)
