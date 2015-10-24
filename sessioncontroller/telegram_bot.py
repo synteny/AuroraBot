@@ -4,7 +4,6 @@ import telegram
 from settings import TELEGRAM_TOKEN
 from pygeocoder import Geocoder
 import pygeolib
-import re
 from model import subscribe, unsubscribe
 from utils import lat_lon_to_cell
 
@@ -37,22 +36,26 @@ while True:
     updates = bot.getUpdates()
     for update in updates:
         text = update.message.text
-        matches = re.search('/(.*) ?(.*)', text)
-        if matches:
-            command = matches.group(1)
-            arguments = matches.group(2)
-            print command, arguments
-            if command == 'subscribe':
-                geo = geo_code(arguments)
-                if geo is None:
-                    reply(update, "Не удалось определить координаты места")
-                else:
-                    print geo
-                    geo_id = lat_lon_to_cell(geo[0], geo[1])
-                    subscribe(update.message.chat_id, arguments, geo_id)
-                    reply(update, "Вы подписаны и получите уведомление о сиянии в Ваше регионе как только так сразу!")
+        text_split = text.split(' ', 1)
+        command, arguments = text_split[0], None
+        if len(text_split) > 1:
+            arguments = text_split[1]
 
-            if command == 'unsubscribe':
-                unsubscribe(update.message.chat_id)
+        if command == '/subscribe':
+            geo = geo_code(arguments)
+            if geo is None:
+                reply(update, "Не удалось определить координаты места")
+            else:
+                geo_id = lat_lon_to_cell(geo[0], geo[1])
+                subscribe(update.message.chat_id, arguments, geo_id)
+                reply(update, "Вы подписаны и получите уведомление о сиянии в Ваше регионе как только так сразу!")
+
+        elif command == '/unsubscribe':
+            unsubscribe(update.message.chat_id)
+            reply(update, "Вы успешно отписаны.")
+
+        else:
+            reply(update, "Неизвестная комманда")
+
     # TODO: remove later
     exit()
