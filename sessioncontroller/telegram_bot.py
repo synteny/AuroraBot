@@ -31,6 +31,14 @@ def reply(update, message):
         text=message,
     )
 
+
+def reply_by_chat_id(chat_id, message):
+    bot.sendMessage(
+        chat_id=chat_id,
+        text=message,
+    )
+
+
 offset = 0
 print 'Press Ctrl+C to kill...'
 while True:
