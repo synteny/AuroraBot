@@ -1,0 +1,52 @@
+:Product: 3-Day Forecast
+:Issued: 2015 Oct 24 1230 UTC
+# Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center
+#
+A. NOAA Geomagnetic Activity Observation and Forecast
+
+The greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA
+Scale levels).
+The greatest expected 3 hr Kp for Oct 24-Oct 26 2015 is 5 (NOAA Scale
+G1).
+
+NOAA Kp index breakdown Oct 24-Oct 26 2015
+
+            Oct 24     Oct 25     Oct 26
+00-03UT        3          5 (G1)     3     
+03-06UT        3          5 (G1)     3     
+06-09UT        3          4          2     
+09-12UT        1          4          2     
+12-15UT        2          3          2     
+15-18UT        4          3          2     
+18-21UT        5 (G1)     3          2     
+21-00UT        5 (G1)     3          2     
+
+Rationale: G1 (Minor) geomagnetic storms are likely on 24-25 Oct due to
+the anticipated arrival of a coronal mass ejection from 22 Oct.
+
+B. NOAA Solar Radiation Activity Observation and Forecast
+
+Solar radiation, as observed by NOAA GOES-13 over the past 24 hours, was
+below S-scale storm level thresholds.
+
+Solar Radiation Storm Forecast for Oct 24-Oct 26 2015
+
+              Oct 24  Oct 25  Oct 26
+S1 or greater    1%      1%      1%
+
+Rationale: No S1 (Minor) or greater solar radiation storms are expected.
+No significant active region activity favorable for radiation storm
+production is forecast.
+
+C. NOAA Radio Blackout Activity and Forecast
+
+No radio blackouts were observed over the past 24 hours.
+
+Radio Blackout Forecast for Oct 24-Oct 26 2015
+
+              Oct 24        Oct 25        Oct 26
+R1-R2           20%           20%           20%
+R3 or greater    1%            1%            1%
+
+Rationale: No R1 (Minor) or greater radio blackouts are expected.  No
+significant active region flare activity is forecast.
