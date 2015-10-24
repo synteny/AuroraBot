@@ -8,5 +8,6 @@ def parse_nowcast(text):
         if sline and not sline.startswith('#'):
             for p in sline.split():
                 yield int(p)
-        else:
-            print(sline)
+
+
+
