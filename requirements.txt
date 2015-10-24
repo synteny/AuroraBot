@@ -1,3 +1,4 @@
 python-telegram-bot==2.8.7
 MySQL-python==1.2.5
 pygeocoder==1.2.5
+requests

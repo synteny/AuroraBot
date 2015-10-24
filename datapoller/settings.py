@@ -1,0 +1,1 @@
+__author__ = 'arik'HOT_DATA_URL = "http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt"
