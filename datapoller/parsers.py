@@ -8,7 +8,9 @@ http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt
 def parse_nowcast(text):
     time = datetime.max  # forecast time remains far in the future if time not found in the file
     data = []
-    for line in text:
+    for i, line in enumerate(text):
+        if(i > 527):
+            print line[:10]
         sline = line.strip()
         if sline:
             if not sline.startswith('#'):

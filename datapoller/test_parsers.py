@@ -6,7 +6,7 @@ import os
 
 class TestParsers(unittest.TestCase):
     def test_parse_nowcast(self):
-        data, time = parse_nowcast(open(os.path.join('testdata', 'aurora-nowcast-map.txt')))
+        data, time = parse_nowcast(open(os.path.join('../testdata', 'aurora-nowcast-map.txt')))
         self.assertEqual(data, NOWCAST_DATA)
         self.assertEqual(time, NOWCAST_TIME)
 
