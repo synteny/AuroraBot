@@ -1,6 +1,7 @@
-from sessioncontroller import *
+from utils import lat_lon_to_cell, LAT_BLOCKS, LON_BLOCKS
 
 import unittest
+
 
 class TestGlobalMethods(unittest.TestCase):
     def test_lat_lon_to_cell(self):
