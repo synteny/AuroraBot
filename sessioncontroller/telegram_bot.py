@@ -31,9 +31,10 @@ def reply(update, message):
         text=message,
     )
 
-
+offset = 0
+print 'Press Ctrl+C to kill...'
 while True:
-    updates = bot.getUpdates()
+    updates = bot.getUpdates(offset=offset+1)
     for update in updates:
         text = update.message.text
         text_split = text.split(' ', 1)
@@ -56,6 +57,4 @@ while True:
 
         else:
             reply(update, "Неизвестная комманда")
-
-    # TODO: remove later
-    exit()
+        offset = update.update_id
