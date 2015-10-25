@@ -1,5 +1,32 @@
 from datetime import datetime
 
+THREEDAY_FORECASTS = [
+    (datetime(2015, 10, 24, 00, 00), 3),
+    (datetime(2015, 10, 25, 00, 00), 5),
+    (datetime(2015, 10, 26, 00, 00), 3),
+    (datetime(2015, 10, 24, 03, 00), 3),
+    (datetime(2015, 10, 25, 03, 00), 5),
+    (datetime(2015, 10, 26, 03, 00), 3),
+    (datetime(2015, 10, 24, 06, 00), 3),
+    (datetime(2015, 10, 25, 06, 00), 4),
+    (datetime(2015, 10, 26, 06, 00), 2),
+    (datetime(2015, 10, 24, 9, 00), 1),
+    (datetime(2015, 10, 25, 9, 00), 4),
+    (datetime(2015, 10, 26, 9, 00), 2),
+    (datetime(2015, 10, 24, 12, 00), 2),
+    (datetime(2015, 10, 25, 12, 00), 3),
+    (datetime(2015, 10, 26, 12, 00), 2),
+    (datetime(2015, 10, 24, 15, 00), 4),
+    (datetime(2015, 10, 25, 15, 00), 3),
+    (datetime(2015, 10, 26, 15, 00), 2),
+    (datetime(2015, 10, 24, 18, 00), 5),
+    (datetime(2015, 10, 25, 18, 00), 3),
+    (datetime(2015, 10, 26, 18, 00), 2),
+    (datetime(2015, 10, 24, 21, 00), 5),
+    (datetime(2015, 10, 25, 21, 00), 3),
+    (datetime(2015, 10, 26, 21, 00), 2)
+]
+
 NOWCAST_TIME = datetime(2015, 10, 24, 14, 15)
 
 NOWCAST_DATA = [
