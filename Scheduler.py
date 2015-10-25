@@ -17,9 +17,9 @@ import sched, time
 def next_nowcast():
     t = datetime.now()
     remaining = NOWCAST_UPDATE_INTERVAL.seconds - ((t.minute * 60 + t.second) % NOWCAST_UPDATE_INTERVAL.seconds)
-    next = t + timedelta(seconds=remaining) + timedelta(minutes=1)
+    next = t + timedelta(seconds=remaining)
     print("Next nowcast update: {0}".format(str(next)))
-    return (next - datetime.fromtimestamp(0)).total_seconds()
+    return next
 
 
 def fetch_nowcast():
@@ -42,7 +42,7 @@ def main():
     fetch_nowcast()
     while (True):
         try:
-            s.enter(next_nowcast() - time.time(), 1, fetch_nowcast, ())
+            s.enter((next_nowcast() - datetime.now()).total_seconds(), 1, fetch_nowcast, ())
             s.run()
         except Exception, e:
             print e
