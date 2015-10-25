@@ -1,6 +1,7 @@
 # coding=utf-8
 from datetime import datetime
 import json
+from messaging.Messaging import declareQueue
 from messaging.QueueConsumer import ConsumerThread
 from messaging.settings import RABBIT_NOTIFY_QUEUE
 from sessioncontroller.telegram_bot import reply, reply_by_chat_id
@@ -20,6 +21,8 @@ def buidIntervalString(timestamp):
 
 def main():
     print 'Press Ctrl+C to kill...'
+
+    declareQueue(RABBIT_NOTIFY_QUEUE)
 
     def sendToUserCallback(ch, method, properties, body):
         print "Sending to user"

@@ -1,9 +1,10 @@
+import calendar
 import json
 from datetime import timedelta, datetime
 import requests
 from datapoller.download import download
 from datapoller.settings import *
-from messaging.Messaging import sendMessage
+from messaging.Messaging import sendMessage, declareQueue
 from messaging.settings import RABBIT_NOTIFY_QUEUE
 from sessioncontroller.model import get_users
 
@@ -36,6 +37,7 @@ def fetch_nowcast():
 
 def main():
     print "Start scheduler"
+    declareQueue(RABBIT_NOTIFY_QUEUE)
     s = sched.scheduler(time.time, time.sleep)
     fetch_nowcast()
     while (True):
