@@ -8,16 +8,13 @@ from datetime import datetime
 def parse_nowcast(text):
     time = datetime.max  # forecast time remains far in the future if time not found in the file
     data = []
-    for i, line in enumerate(text):
-        if(i > 527):
-            print line[:10]
-        sline = line.strip()
-        if sline:
-            if not sline.startswith('#'):
-                for p in sline.split():
+    for line in map(lambda l: l.decode('utf_8').strip(), text):
+        if line:
+            if not line.startswith('#'):
+                for p in line.split():
                     data.append(int(p) if p != 'n/a' else 0)
             else:
-                m = re.search('^# Product Valid At: (.*)', sline)
+                m = re.search('^# Product Valid At: (.*)', line)
                 if m:
                     time = datetime.strptime(m.group(1), '%Y-%m-%d %H:%M')
     return data, time

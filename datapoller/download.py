@@ -1,1 +1,1 @@
-import requestsfrom datapoller.parsers import parse_nowcast__author__ = 'arik'def download(url):    r = requests.get(url)    print(r.text[:1000])    return parse_nowcast(r.text)
+import requestsfrom datapoller.parsers import parse_nowcast__author__ = 'arik'def download(url):    r = requests.get(url, stream=True)    return parse_nowcast(list(r.iter_lines()))
