@@ -10,28 +10,30 @@ __author__ = 'arik'
 
 import sched, time
 
+def next_nowcast():
+    return time.time() + 5
+
+def fetch_nowcast():
+    print "Fetching nowcast"
+    (dataList, time) = download(NOWCAST_DATA_URL)
+    allUsers = get_users()
+    print "Updating..."
+    for user in allUsers:
+        geo_id = user[1]
+        level = dataList[geo_id]
+        if(level >= 0):
+            sendMessage("send", json.dumps({"geo": user[0], "chat_id": user[2], "level": level}))
+
 def main():
-    def processUpdate():
-        print "Start update"
-        (dataList, time) = download(NOWCAST_DATA_URL)
-        allUsers = get_users()
-        print "Process update"
-        for user in allUsers:
-            geo_id = user[1]
-            level = dataList[geo_id]
-            if(level >= 0):
-                sendMessage("send", json.dumps({"geo": user[0], "chat_id": user[2], "level": level}))
-
-
+    print "Start scheduler"
     s = sched.scheduler(time.time, time.sleep)
-    s.enter(0, 1, processUpdate, ())
+    fetch_nowcast()
     while(True):
         try:
-            s.enter(100, 1, processUpdate, ())
+            s.enter(next_nowcast() - time.time(), 1, fetch_nowcast, ())
             s.run()
         except Exception, e:
             print e
-
 
 if __name__ == '__main__':
     main()
