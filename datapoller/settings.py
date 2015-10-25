@@ -1,1 +1,1 @@
-__author__ = 'arik'NOWCAST_DATA_URL = "http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt"
+__author__ = 'arik'from datetime import timedeltaNOWCAST_UPDATE_INTERVAL = timedelta(minutes=15)NOWCAST_DATA_URL = "http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt"
