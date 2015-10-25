@@ -10,24 +10,28 @@ __author__ = 'arik'
 
 import sched, time
 
+def main():
+    def processUpdate():
+        print "Start update"
+        (dataList, time) = download(NOWCAST_DATA_URL)
+        allUsers = get_users()
+        print "Process update"
+        for user in allUsers:
+            geo_id = user[1]
+            level = dataList[geo_id]
+            if(level >= 0):
+                sendMessage("send", json.dumps({"geo": user[0], "chat_id": user[2], "level": level}))
 
 
-def processUpdate():
-    print "Start update"
-    (dataList, time) = download(NOWCAST_DATA_URL)
-    allUsers = get_users()
-    print "Process update"
-    for user in allUsers:
-        geo_id = user[0]
-        level = dataList[geo_id]
-        if(level >= 5):
-            sendMessage("send", json.dumps({"geo": user[2], "chanel_id": user[1], "level": level}))
+    s = sched.scheduler(time.time, time.sleep)
+    s.enter(0, 1, processUpdate, ())
+    while(True):
+        try:
+            s.enter(100, 1, processUpdate, ())
+            s.run()
+        except Exception, e:
+            print e
 
 
-s = sched.scheduler(time.time, time.sleep)
-while(True):
-    try:
-        s.enter(10, 1, processUpdate, ())
-        s.run()
-    except Exception, e:
-        print e
+if __name__ == '__main__':
+    main()
