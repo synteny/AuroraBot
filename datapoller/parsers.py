@@ -3,9 +3,12 @@ import itertools
 from datetime import datetime
 
 
-""" Parses the immediate aurora forecast.
-    http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt """
 def parse_nowcast(text):
+    """
+    Parses the immediate aurora forecast.
+    http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt
+    """
+
     time = datetime.max  # forecast time remains far in the future if time not found in the file
     data = []
     for line in map(lambda l: l.decode('utf_8').strip(), text):
@@ -20,9 +23,12 @@ def parse_nowcast(text):
     return data, time
 
 
-""" Parses the three-day global Kp index forecast.
-    http://services.swpc.noaa.gov/text/3-day-forecast.txt """
 def parse_three_day_forecast(text):
+    """
+    Parses the three-day global Kp index forecast.
+    http://services.swpc.noaa.gov/text/3-day-forecast.txt
+    """
+
     lines = itertools.imap(lambda l: l.strip(), text)
 
     def fetch_line(iter, matcher):
