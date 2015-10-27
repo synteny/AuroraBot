@@ -1,1 +1,1 @@
-__author__ = 'arik'from datetime import timedeltaNOWCAST_UPDATE_INTERVAL = timedelta(minutes=15)NOWCAST_DATA_URL = "http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt"
+__author__ = 'arik'from datetime import timedeltaNOWCAST_UPDATE_INTERVAL = timedelta(minutes=15)NOWCAST_DATA_URL = "http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt"THRESHOLD_FOR_KP = [50, 40, 30, 20, 10, 8, 7, 5, 3, 2, 1]   # kp 0 - first value, kp 9 - last

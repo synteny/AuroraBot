@@ -1,12 +1,12 @@
 import calendar
 import json
 from datetime import timedelta, datetime
-import requests
 from datapoller.download import download
 from datapoller.settings import *
 from messaging.Messaging import sendMessage, declareQueue
 from messaging.settings import RABBIT_NOTIFY_QUEUE
 from sessioncontroller.model import get_users
+from sessioncontroller.utils import is_level_interesting_for_kp
 
 __author__ = 'arik'
 
@@ -29,14 +29,15 @@ def fetch_nowcast():
     print "Updating..."
     for user in allUsers:
         geo_id = user[1]
+        kp_level = user[3]
         level = dataList[geo_id]
-        if(level >= 0):
+        if is_level_interesting_for_kp(level, kp_level):
             timeInTs =  calendar.timegm(time.timetuple())
             sendMessage(RABBIT_NOTIFY_QUEUE, json.dumps({"time": timeInTs, "geo": user[0], "chat_id": user[2], "level": level}))
 
 
 def main():
-    print "Start scheduler"
+    print "Press Ctrl+C to kill..."
     declareQueue(RABBIT_NOTIFY_QUEUE)
     s = sched.scheduler(time.time, time.sleep)
     fetch_nowcast()
