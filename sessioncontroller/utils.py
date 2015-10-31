@@ -34,6 +34,7 @@ def get_kp_level(lat):
         if abs(lat) >= latTable:
             return i
         i += 1
+    return 10
 
 
 def is_level_interesting_for_kp(level, kp):

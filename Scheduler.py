@@ -1,12 +1,9 @@
-import calendar
-import json
 from datetime import timedelta, datetime
-from datapoller.download import download
+from auroramodel.AuroraModel import updateModel, hasValidModel, processUserLocation, registerModelStorage
 from datapoller.settings import *
 from messaging.Messaging import sendMessage, declareQueue
 from messaging.settings import RABBIT_NOTIFY_QUEUE
 from sessioncontroller.model import get_users
-from sessioncontroller.utils import is_level_interesting_for_kp
 
 __author__ = 'arik'
 
@@ -24,20 +21,22 @@ def next_nowcast():
 
 def fetch_nowcast():
     print "Fetching nowcast"
-    (dataList, time) = download(NOWCAST_DATA_URL)
-    allUsers = get_users()
-    print "Updating..."
-    for user in allUsers:
-        geo_id = user[1]
-        kp_level = user[3]
-        level = dataList[geo_id]
-        if is_level_interesting_for_kp(level, kp_level):
-            timeInTs =  calendar.timegm(time.timetuple())
-            sendMessage(RABBIT_NOTIFY_QUEUE, json.dumps({"time": timeInTs, "geo": user[0], "chat_id": user[2], "level": level}))
+    updateModel()
+    if hasValidModel():
+        allUsers = get_users()
+        print "Updating..."
+        for user in allUsers:
+            geo = user[0]
+            geo_id = user[1]
+            chat_id = user[2]
+            kp_level = user[3]
+            bot = user[4]
+            processUserLocation(geo_id, geo, kp_level, chat_id, bot)
 
 
-def main():
+def main(sharedDict):
     print "Press Ctrl+C to kill..."
+    registerModelStorage(sharedDict)
     declareQueue(RABBIT_NOTIFY_QUEUE)
     s = sched.scheduler(time.time, time.sleep)
     fetch_nowcast()
@@ -50,4 +49,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main({})
