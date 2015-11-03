@@ -35,7 +35,6 @@ def fetch_nowcast():
 
 
 def main(sharedDict):
-    print "Press Ctrl+C to kill..."
     registerModelStorage(sharedDict)
     declareQueue(RABBIT_NOTIFY_QUEUE)
     s = sched.scheduler(time.time, time.sleep)
@@ -49,4 +48,5 @@ def main(sharedDict):
 
 
 if __name__ == '__main__':
+    print "Press Ctrl+C to kill..."
     main({})

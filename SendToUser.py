@@ -22,8 +22,6 @@ def getIntervalSec(timestamp):
 
 
 def main():
-    print 'Press Ctrl+C to kill...'
-
     declareQueue(RABBIT_NOTIFY_QUEUE)
 
     def sendToUserCallback(ch, method, properties, body):
@@ -42,4 +40,5 @@ def main():
     channel.start_consuming()
 
 if __name__ == '__main__':
+    print 'Press Ctrl+C to kill...'
     main()
