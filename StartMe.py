@@ -22,17 +22,17 @@ def startTelegramBot(sharedDict):
 
 if __name__ == '__main__':
     print 'Press Ctrl+C to kill...'
-    sсhedulerProcess = None
+    schedulerProcess = None
     sendToUserProcess = None
     telegramBotProcess = None
     manager = Manager()
     sharedDict = manager.dict()
     while True:
         try:
-            if sсhedulerProcess is None or sсhedulerProcess.is_alive() is False:
+            if schedulerProcess is None or schedulerProcess.is_alive() is False:
                 print "Starting schedulerProcess"
-                sсhedulerProcess = Process(target=startScheduler, args=(sharedDict,))
-                sсhedulerProcess.start()
+                schedulerProcess = Process(target=startScheduler, args=(sharedDict,))
+                schedulerProcess.start()
 
             if sendToUserProcess is None or sendToUserProcess.is_alive() is False:
                 print "Starting sendToUserProcess"
