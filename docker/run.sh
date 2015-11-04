@@ -1,5 +1,7 @@
 #!/bin/bash
 
+if [ -z ${TELEGRAM_TOKEN+x} ]; then echo "TELEGRAM_TOKEN environment variable is not defined. Set it to the bot token."; exit 1; fi
+
 ./stop.sh
 
 docker rm app
@@ -22,7 +24,7 @@ docker run --name rabbitmq \
 docker run --name app \
 	--link rabbitmq \
 	--link db \
-	-e TELEGRAM_TOKEN=161743683:AAHhg4I1bIJveXWEo8AzYkV0WBs1OwI19G0 \
+	-e TELEGRAM_TOKEN=$TELEGRAM_TOKEN \
         -v `pwd`/..:/var/aurorabot \
 	app \
         sh /var/aurorabot/docker/entrypoint.sh
