@@ -6,21 +6,25 @@ __author__ = 'arik'
 import pika
 
 def getConnection():
-    host = "localhost"
     credentials = pika.PlainCredentials(RABBIT_LOGIN, RABBIT_PASSWORD)
     connection = pika.BlockingConnection(pika.ConnectionParameters(
         host=RABBIT_HOST, credentials=credentials)
     )
     return connection
 
-sendChanel = getConnection().channel()
-
+sendChanel = None
 
 def declareQueue(queueName):
-    sendChanel.queue_declare(queue=queueName)
+    getSendChannel().queue_declare(queue=queueName)
 
+
+def getSendChannel():
+    global sendChanel
+    if sendChanel is None or sendChanel.is_open is False:
+        sendChanel = getConnection().channel()
+    return sendChanel
 
 def sendMessage(queueName, message) :
-    sendChanel.basic_publish(exchange='',
+    getSendChannel().basic_publish(exchange='',
                   routing_key=queueName,
                   body=message)

@@ -10,7 +10,7 @@ def lat_lon_to_cell(lat, lon):
     Latitude ranges between -90.0 (south pole) and +90.0 (north pole), longitude is between -180.0 and +180.0.
     """
     return int((lat + 90) * LAT_BLOCKS / 180.0) * (LON_BLOCKS) \
-    + int((int(lon) if int(lon) >= 0 else (360 - int(lon))) * LAT_BLOCKS / 360.0)
+    + int((lon + 180) * LON_BLOCKS / 360.0)
 
 
 def get_kp_level(lat):
