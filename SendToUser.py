@@ -30,7 +30,7 @@ def main():
         validTime = getIntervalSec(recieve["time"])
         if validTime < 60: # to old
             return
-        message = u"Прогноз на ближайшие {}. В вашем городе ({}) ожидается северное сияние видимое с вероятностью {}%"\
+        message = u"Через {} в вашем месте ({}) вероятность полярного сияния составит {}%"\
             .format(buidIntervalString(validTime), recieve["geo"], str(recieve["level"]))
         reply_by_chat_id(recieve["chat_id"], message)
 
