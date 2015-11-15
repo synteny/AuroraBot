@@ -26,13 +26,16 @@ def main():
 
     def sendToUserCallback(ch, method, properties, body):
         print "Sending to user"
-        recieve = json.loads(body)
-        validTime = getIntervalSec(recieve["time"])
-        if validTime < 60: # to old
-            return
-        message = u"Прогноз на ближайшие {}. В вашем городе ({}) ожидается северное сияние видимое с вероятностью {}%"\
-            .format(buidIntervalString(validTime), recieve["geo"], str(recieve["level"]))
-        reply_by_chat_id(recieve["chat_id"], message)
+        try:
+            recieve = json.loads(body)
+            validTime = getIntervalSec(recieve["time"])
+            if validTime < 60: # to old
+                return
+            message = u"Прогноз на ближайшие {}. В вашем городе ({}) ожидается северное сияние видимое с вероятностью {}%"\
+                .format(buidIntervalString(validTime), recieve["geo"], str(recieve["level"]))
+            reply_by_chat_id(recieve["chat_id"], message)
+        except StandardError as e:
+            print(e)
 
     connection = getConnection()
     channel = connection.channel()

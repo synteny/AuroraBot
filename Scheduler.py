@@ -21,17 +21,20 @@ def next_nowcast():
 
 def fetch_nowcast():
     print "Fetching nowcast"
-    updateModel()
-    if hasValidModel():
-        allUsers = get_users()
-        print "Updating..."
-        for user in allUsers:
-            geo = user[0]
-            geo_id = user[1]
-            chat_id = user[2]
-            kp_level = user[3]
-            bot = user[4]
-            processUserLocation(geo_id, geo, kp_level, chat_id, bot)
+    try:
+        updateModel()
+        if hasValidModel():
+            allUsers = get_users()
+            print "Updating..."
+            for user in allUsers:
+                geo = user[0]
+                geo_id = user[1]
+                chat_id = user[2]
+                kp_level = user[3]
+                bot = user[4]
+                processUserLocation(geo_id, geo, kp_level, chat_id, bot)
+    except StandardError as e:
+        print(e)
 
 
 def main(sharedDict):
@@ -43,8 +46,8 @@ def main(sharedDict):
         try:
             s.enter((next_nowcast() - datetime.now()).total_seconds(), 1, fetch_nowcast, ())
             s.run()
-        except Exception, e:
-            print e
+        except StandardError as e:
+            print(e)
 
 
 if __name__ == '__main__':
