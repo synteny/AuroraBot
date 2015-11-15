@@ -1,0 +1,26 @@
+# aurourabot container
+
+FROM debian
+
+MAINTAINER Vladimir Smirnov
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update
+
+RUN apt-get install -y libmysqlclient-dev 
+
+RUN apt-get install -y python
+
+RUN apt-get install -y python-pip
+
+RUN apt-get install -y python-dev
+
+RUN apt-get install -y libgnomevfs2-0
+
+RUN apt-get install -y libgnomevfs2-dev
+
+RUN apt-get install -y python-gnome2
+
+RUN mkdir -p /var/aurorabot
+
